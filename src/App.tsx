@@ -106,6 +106,99 @@ return<>
 
 </>
 }
+function Challenge12(){
+  const [items,setitems]=useState(["item 1"]);
+  const additem=()=>{
+     setitems([...items,"newitem"]);
+  }
+  return<>
+  <button onClick={additem}>CLick to add </button>
+    <ul>
+      {
+            
+            items.map((item,index)=>(
+            <li key={index}>{item}</li>
+            
+      ))}
+      
+    </ul>
+  
+  </>
+  
+}
+
+
+function Challenge13(){
+  const [items,setitems]=useState(["item 1","item 2","item 3"]);
+  const removeitem=(index:number)=>{
+    setitems(items.filter((_,i)=>i!==index));
+  }
+  return<>
+    <ul>
+      {
+            items.map((item,index)=>(
+            <li key={index}>
+              {item}
+              <button onClick={()=>removeitem(index)}></button>
+              </li>  
+      ))}
+    </ul>
+  </>
+}
+ 
+function Challenge14(){
+  const [items,setitems]=useState<string[]>([]);
+  const [input,setinput]=useState("");
+  const submitted=()=>{
+    setitems([...items,input]);
+    setinput("");
+    
+  }
+  return <> 
+  <input type='input'value={input} name='input' onChange={(e)=>setinput(e.target.value)}></input>
+  <button onClick={submitted}>Submit</button>
+  
+  <ul>
+    {
+      items.map((item,index)=>(
+        <li key={index}>
+          {item}
+        </li>
+      ))
+    }
+  </ul>
+  </>
+}
+
+function Challenge15(){
+  const [items,setitems]=useState<string[]>([]);
+  const [input,setinput]=useState("");
+  const submitted=()=>{
+    setitems([...items,input]);
+    setinput("");
+    
+  }
+
+  const remove=(index:number)=>{
+    setitems(items.filter((_,i)=>i!==index));
+
+  }
+  return <> 
+  <input type='input'value={input} name='input' onChange={(e)=>setinput(e.target.value)}></input>
+  <button onClick={submitted}>Submit</button>
+  
+  <ul>
+    {
+      items.map((item,index)=>(
+        <li key={index}>
+          {item}
+          <button onClick={()=>(remove(index))}>Remove</button>
+        </li>
+      ))
+    }
+  </ul>
+  </>
+}
 
 
 
@@ -132,6 +225,8 @@ function App() {
       <Challenge9 />
       <Challenge10 />
       <Challenge11 />
+      <Challenge13 />
+      <Challenge15 />
     </div>
   );
 }
