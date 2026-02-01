@@ -199,6 +199,72 @@ function Challenge15(){
   </ul>
   </>
 }
+function Challenge16_5({name}:{name:string}){
+  return<>
+  <h4>Hello {name}. </h4>
+  </>
+
+}
+function Challenge16(){
+  return<>
+  <Challenge16_5 name="sijan" />
+  <Challenge16_5 name="vision" />
+  </>
+
+}
+
+
+function Challenge17_5({name,age}:{name:string,age:number}){
+  return<>
+  <h4>Hello {name}. with age  {age} </h4>
+  </>
+
+}
+function Challenge17(){
+  return<>
+  <Challenge17_5 name="sijan" age={20} />
+
+  </>
+
+}
+
+
+function Challenge18_5({name,ontap}:{name:string,ontap:()=>void}){
+  return<>
+  <button onClick={ontap}>{name}</button>
+  </>
+
+}
+function Challenge18(){
+
+  const tap1=()=>alert("hello");
+  const tap2=()=>alert("hi");
+  return<>
+  <Challenge18_5 name="button1" ontap={tap1} />
+  <Challenge18_5 name="button2" ontap={tap2} />
+
+  </>
+
+}
+
+function Challenge19_5({name,ontap}:{name:string,ontap:()=>void}){
+  return<>
+  <button onClick={ontap}>{name}</button>
+  </>
+
+}
+function Challenge19(){
+  const [count,setcount]=useState(0);
+  const tap1=()=>setcount(count+1);
+  const tap2=()=>setcount(count-1);
+  return<>
+  {count}
+  <Challenge18_5 name="increase" ontap={tap1} />
+  <Challenge18_5 name="decrease" ontap={tap2} />
+
+  </>
+
+}
 
 
 
@@ -227,6 +293,7 @@ function App() {
       <Challenge11 />
       <Challenge13 />
       <Challenge15 />
+      <Challenge19  />
     </div>
   );
 }
