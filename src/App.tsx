@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 // ============================================
 // CHALLENGE AREA - Code here!
@@ -261,9 +261,78 @@ function Challenge19(){
   {count}
   <Challenge18_5 name="increase" ontap={tap1} />
   <Challenge18_5 name="decrease" ontap={tap2} />
+  </>
+}
+function Challenge20(){
+const users=[
+  {id:1,name:"Sijan",role:"CEO"},
+  {id:2,name:"rijan",role:"admin"},
+  {id:3,name:"vison",role:"HR"},
+];
+  return<>
+  <ul>
+  {
+    users.map((user,index)=>(
+      
+        <li key={user.id}>
+          {user.name} is {user.role}
+        </li>
+    ))
+  }
+  </ul>
+  </>
+}
+
+function Challenge21(){
+  const [datas,setdatas]=useState<{id:number,name:string}[]>([{id:1,name:"Sijan"},{id:2,name:"vison"}]);
+  const [input,setinput]=useState("");
+  const contain=()=>{
+    setdatas([...datas,{id:Date.now(),name:input}]);
+
+  }
+
+  return<>
+  <ul>
+  {
+    
+      datas.map((data,index)=>(
+        
+          <li key={data.id}>{data.name}</li>
+        
+        ))
+        
+  }
+  </ul>
+  <input value={input} onChange={(e)=>setinput(e.target.value)}/>
+  <button onClick={()=>contain()}> contain</button>
 
   </>
+}
 
+function Challenge22(){
+  const [datas,setdatas]=useState<{id:number,name:string}[]>([{id:1,name:"Sijan"},{id:2,name:"vison"},{id:4,name:"on"}]);
+  const dele=(idtodelete:number)=>{
+    setdatas(datas.filter((user)=>user.id!==idtodelete));
+
+  }
+
+  return<>
+  <ul>
+  {
+    
+      datas.map((data,index)=>(
+        
+          <li key={data.id}>{data.name}
+          <button onClick={()=>dele(data.id)}>Delete</button>
+          </li>
+        
+        ))
+        
+  }
+  </ul>
+
+
+  </>
 }
 
 
@@ -293,7 +362,7 @@ function App() {
       <Challenge11 />
       <Challenge13 />
       <Challenge15 />
-      <Challenge19  />
+      <Challenge22  />
     </div>
   );
 }
