@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import {  useState,useEffect } from 'react';
 
 // ============================================
 // CHALLENGE AREA - Code here!
@@ -242,9 +242,7 @@ function Challenge18(){
   return<>
   <Challenge18_5 name="button1" ontap={tap1} />
   <Challenge18_5 name="button2" ontap={tap2} />
-
   </>
-
 }
 
 function Challenge19_5({name,ontap}:{name:string,ontap:()=>void}){
@@ -327,14 +325,104 @@ function Challenge22(){
           </li>
         
         ))
-        
   }
   </ul>
+  </>
+}
+
+function Challenge23(){
+  const [count,setcount]=useState(0);
+
+const increment=()=>setcount(count+1);
+
+
+  useEffect(()=>{
+    document.title="count: "+count;
+  },[count]);
+  return<>
+  <button onClick={increment}>
+    click me !
+  </button>
+  </>
+}
+
+function Challenge24(){
+  const [fact,setfact]=useState("Loading...");
+
+
+  useEffect(()=>{
+  
+    fetch('https://catfact.ninja/fact').then(res=>res.json()).then(data=>setfact(data.fact));
+
+  },[]);
+
+
+  return <>
+  <h3>Todays cat fact is :</h3>
+  <p>"{fact}"</p>
 
 
   </>
 }
 
+function Challenge25() {
+  const users = [
+    { id: 1, name: "Alice" },
+    { id: 2, name: "Bob" },
+    { id: 3, name: "Charlie" },
+    { id: 4, name: "David" },
+    { id: 5, name: "Eve" }
+  ];
+  const [searchTerm, setSearchTerm] = useState("");
+  let filteredUsers=users.filter((user)=>(user.name.toLowerCase().includes(searchTerm.toLowerCase())));
+
+  return<>
+  <input name='searchTerm' placeholder='search'onChange={(e)=>setSearchTerm(e.target.value)} /> 
+  <ul>
+    {
+      filteredUsers.map((user)=>(
+        <li key={user.id}>{user.name}</li>
+      ))}
+  </ul>
+  </>
+}
+
+function Challenge26(){
+  type Product={id:number,name:string,price:number};
+  const product:Product[]=[{id:1,name:"laptop",price:500000},
+                           {id:2,name:"rice cooker",price:4000},
+                           {id:5,name:"dumbell",price:2500}
+                          ];
+  const [cart,setcart]=useState<Product[]>([]);
+  const total=cart.reduce((total,item)=>total+item.price,0);
+  const addtocart=(prodcuct:Product)=>{
+    setcart([...cart,prodcuct]);
+  }
+    
+  return<>
+  <h2>Products:</h2>
+  <ul>
+    {
+      product.map((produc)=>(
+        <li key={produc.id}><h3>{produc.name}</h3> <p>Rs. {produc.price} </p>
+        <button onClick={()=>addtocart(produc)}>Add to cart</button>
+        </li>
+      ))
+    }
+  </ul>
+  <h2>Cart:
+  </h2>
+  <ul>
+    {
+      cart.map((car)=>(
+        <li key={car.id}><h3>{car.name}</h3> <p>Rs. {car.price} </p>
+        </li>
+      ))
+    }
+  </ul>
+  <h2>Total={total}</h2>
+  </>
+}
 
 
 
@@ -362,7 +450,7 @@ function App() {
       <Challenge11 />
       <Challenge13 />
       <Challenge15 />
-      <Challenge22  />
+      <Challenge26 />
     </div>
   );
 }
